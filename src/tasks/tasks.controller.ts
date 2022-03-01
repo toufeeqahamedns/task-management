@@ -24,12 +24,12 @@ export class TasksController {
         return this.tasksService.getTaskById(id);
     }
 
-    // @Post()
-    // createTask(
-    //     @Body() createTaskDto: CreateTaskDto,
-    // ): Task {
-    //     return this.tasksService.createTask(createTaskDto);
-    // }
+    @Post()
+    async createTask(
+        @Body() createTaskDto: CreateTaskDto,
+    ): Promise<Task> {
+        return this.tasksService.createTask(createTaskDto);
+    }
 
     // @Patch('/:id/status')
     // updateTaskStatus(
