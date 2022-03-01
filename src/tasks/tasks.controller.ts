@@ -20,12 +20,12 @@ export class TasksController {
     // }
 
     @Get('/:id')
-    async getTaskById(@Param('id') id: string): Promise<Task> {
+    getTaskById(@Param('id') id: string): Promise<Task> {
         return this.tasksService.getTaskById(id);
     }
 
     @Post()
-    async createTask(
+    createTask(
         @Body() createTaskDto: CreateTaskDto,
     ): Promise<Task> {
         return this.tasksService.createTask(createTaskDto);
@@ -40,8 +40,8 @@ export class TasksController {
     //     return this.tasksService.updateTaskStatus(id, status);
     // }
 
-    // @Delete('/:id')
-    // deleteTask(@Param('id') id: String): void {
-    //     return this.tasksService.deleteTask(id);
-    // }
+    @Delete('/:id')
+    deleteTask(@Param('id') id: string): Promise<void> {
+        return this.tasksService.deleteTask(id);
+    }
 }
