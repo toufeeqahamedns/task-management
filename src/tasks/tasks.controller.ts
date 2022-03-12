@@ -8,10 +8,12 @@ import { UpdateTaskStatusDto } from './dto/update-task-status.dto';
 import { TaskStatus } from './task-status.enum';
 import { Task } from './task.entity';
 import { TasksService } from './tasks.service';
+import { Logger } from '@nestjs/common';
 
 @Controller('tasks')
 @UseGuards(AuthGuard())
 export class TasksController {
+    private logger = new Logger('TasksController')
     constructor(private tasksService: TasksService) { }
 
     @Get()
@@ -19,6 +21,7 @@ export class TasksController {
         @Query() filterDto: GetTaskFilterDto,
         @GetUser() user: User,
     ): Promise<Task[]> {
+        this.logger.verbose(`User ${user.username} retreving all tasks. Filters: ${JSON.stringify(filterDto)}`)
         return this.tasksService.getTasks(filterDto, user);
     }
 
@@ -35,6 +38,7 @@ export class TasksController {
         @Body() createTaskDto: CreateTaskDto,
         @GetUser() user: User,
     ): Promise<Task> {
+        this.logger.verbose(`User ${user.username} creating a new Task. Data: ${JSON.stringify(createTaskDto)}`)
         return this.tasksService.createTask(createTaskDto, user);
     }
 
