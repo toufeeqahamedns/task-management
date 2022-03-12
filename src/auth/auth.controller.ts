@@ -13,7 +13,7 @@ export class AuthController {
     }
 
     @Post('/signin')
-    signIn(@Body() authCredentialDto: AuthCredentialDto): Promise<string> {
+    signIn(@Body() authCredentialDto: AuthCredentialDto): Promise<{ accessToken: string }> {
         return this.authService.signIn(authCredentialDto);
     }
 
